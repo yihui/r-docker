@@ -10,4 +10,4 @@ RUN apt-get update -qq
 RUN apt-get install -y r-base-dev
 
 # packages that I need
-RUN apt-get install  r-recommended r-cran-xml r-cran-rcurl r-cran-rgl r-cran-knitr
+RUN apt-get install -y r-cran-xml r-cran-rcurl r-cran-rgl r-cran-knitr
