@@ -18,7 +18,8 @@ RUN git config --global user.name "Yihui Xie"
 RUN git config --global user.email "xie@yihui.name"
 RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/install-r-devel | bash
 RUN [ ! -d ~/R ] && mkdir ~/R
-RUN cp .Renviron .Rprofile ~/
-RUN R -f r-config.R
-RUN Rd -f r-config.R
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Renviron > ~/.Renviron
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Rprofile > ~/.Rprofile
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | R
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | Rd
 
