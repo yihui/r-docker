@@ -9,7 +9,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get update -qq
 RUN apt-get install -y r-base-dev pandoc pandoc-citeproc curl
 RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-cran-pkgs | bash
-RUN sudo apt-get install -y subversion
+RUN sudo apt-get install -y subversion git
 RUN sudo apt-get build-dep -y r-base-dev
 RUN sudo apt-get autoremove -y
 RUN sudo apt-get upgrade -y
