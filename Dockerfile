@@ -20,6 +20,6 @@ RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/install-r-devel
 RUN [ ! -d ~/R ] && mkdir ~/R
 RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Renviron > ~/.Renviron
 RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Rprofile > ~/.Rprofile
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | R
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | Rd
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | R --no-save
+RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | Rd --no-save
 
