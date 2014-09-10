@@ -9,4 +9,4 @@ rm -rf library
   make -s -j2 && make -s install)
 
 # R-devel is available as Rd now
-sudo ln -s -f ~/r-devel/bin/R /usr/bin/Rd
+ln -s -f ~/r-devel/bin/R /usr/bin/Rd
