@@ -8,15 +8,22 @@ RUN add-apt-repository -y ppa:marutter/c2d4u
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get update -qq
 RUN apt-get install -y r-base-dev pandoc pandoc-citeproc curl
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-cran-pkgs | bash
+
+ADD r-cran-pkgs /tmp/r-cran-pkgs
+RUN bash /tmp/r-cran-pkgs
+
 RUN sudo apt-get install -y subversion git
 RUN sudo apt-get build-dep -y r-base-dev
 RUN sudo apt-get autoremove -y
 RUN sudo apt-get upgrade -y
 RUN sudo apt-get autoclean
+
 RUN git config --global user.name "Yihui Xie"
 RUN git config --global user.email "xie@yihui.name"
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/install-r-devel | bash
+
+ADD install-r-devel /tmp/install-r-devel
+RUN bash /tmp/install-r-devel
+
 RUN [ ! -d ~/R ] && mkdir ~/R
 
 # Since the default user is root, $HOME is actually / at this point
