@@ -18,8 +18,10 @@ RUN git config --global user.name "Yihui Xie"
 RUN git config --global user.email "xie@yihui.name"
 RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/install-r-devel | bash
 RUN [ ! -d ~/R ] && mkdir ~/R
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Renviron > ~/.Renviron
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/.Rprofile > ~/.Rprofile
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | R --no-save
-RUN curl https://raw.githubusercontent.com/yihui/r-docker/master/r-config.R | Rd --no-save
 
+# Since the default user is root, $HOME is actually / at this point
+ADD .Renviron /.Renviron
+ADD .Rprofile /.Rprofile
+ADD r-config.R /tmp/r-config.R
+RUN cat /tmp/r-config.R | R --no-save
+RUN cat /tmp/r-config.R | Rd --no-save
