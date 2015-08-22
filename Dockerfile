@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER Yihui Xie <xie@yihui.name>
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq
 RUN apt-get -qq install -y software-properties-common
 RUN add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_release -cs`/"
