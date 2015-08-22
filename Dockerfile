@@ -7,28 +7,23 @@ RUN add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_rel
 RUN add-apt-repository -y ppa:marutter/c2d4u
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get update -qq
-RUN apt-get install -y r-base-dev pandoc pandoc-citeproc curl
+RUN apt-get install -y r-base-dev git
+
+RUN export PATH=$HOME/texlive/bin/x86_64-linux:$PATH
+RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
+RUN tlmgr path add
+RUN wget https://github.com/yihui/ubuntu-bin/releases/download/latest/texlive-local.deb
+RUN dpkg -i texlive-local.deb && rm texlive-local.deb
+RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash
 
 ADD r-cran-pkgs /tmp/r-cran-pkgs
 RUN bash /tmp/r-cran-pkgs
 
-RUN sudo apt-get install -y subversion git
-RUN sudo apt-get build-dep -y r-base-dev
-RUN sudo apt-get autoremove -y
-RUN sudo apt-get upgrade -y
-RUN sudo apt-get autoclean
-
-RUN git config --global user.name "Yihui Xie"
-RUN git config --global user.email "xie@yihui.name"
-
-ADD install-r-devel /tmp/install-r-devel
-RUN bash /tmp/install-r-devel
-
-RUN [ ! -d ~/R ] && mkdir ~/R
+RUN apt-get autoremove -y
+RUN apt-get autoclean
 
 # Since the default user is root, $HOME is actually / at this point
 ADD .Renviron /.Renviron
 ADD .Rprofile /.Rprofile
 ADD r-config.R /tmp/r-config.R
 RUN cat /tmp/r-config.R | R --no-save
-RUN cat /tmp/r-config.R | Rd --no-save
