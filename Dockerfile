@@ -14,7 +14,8 @@ ENV PATH=$PATH:$HOME/texlive/bin/x86_64-linux
 RUN echo $PATH && ls -al ~
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
 RUN echo $PATH && ls -al $HOME/texlive/bin/x86_64-linux
-RUN $HOME/texlive/bin/x86_64-linux/tlmgr path add
+RUN $HOME/texlive/bin/x86_64-linux/tlmgr path add || true
+RUN echo which pdflatex
 RUN wget https://github.com/yihui/ubuntu-bin/releases/download/latest/texlive-local.deb
 RUN dpkg -i texlive-local.deb && rm texlive-local.deb
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash
