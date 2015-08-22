@@ -10,7 +10,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get -qq update
 RUN apt-get install -y wget dpkg > /dev/null
 
-ENV PATH=$HOME/texlive/bin/x86_64-linux:$PATH
+ENV PATH=$PATH:$HOME/texlive/bin/x86_64-linux
 RUN echo $PATH && ls -al ~
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
 RUN echo $PATH && ls -al $HOME/texlive/bin/x86_64-linux
