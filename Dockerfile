@@ -13,7 +13,7 @@ RUN apt-get install -y wget dpkg > /dev/null
 ENV PATH=$HOME/texlive/bin/x86_64-linux:$PATH
 RUN echo $PATH && ls -al ~
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
-RUN echo $PATH && ls -al $HOME/texlive
+RUN echo $PATH && ls -al $HOME/texlive/bin/x86_64-linux
 RUN $HOME/texlive/bin/x86_64-linux/tlmgr path add
 RUN wget https://github.com/yihui/ubuntu-bin/releases/download/latest/texlive-local.deb
 RUN dpkg -i texlive-local.deb && rm texlive-local.deb
