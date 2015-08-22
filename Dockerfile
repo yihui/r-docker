@@ -10,17 +10,13 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get -qq update
 RUN apt-get install -y wget dpkg > /dev/null
 
-RUN mkdir $HOME/bin || true
-ENV PATH=$PATH:$HOME/bin:$HOME/texlive/bin/x86_64-linux
-RUN echo $PATH && ls -al ~
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
-RUN echo $PATH && ls -al $HOME/texlive/bin/x86_64-linux
 RUN for i in $(find $HOME/texlive/bin/x86_64-linux -type f -executable); do ln -s $i /usr/local/bin/; done
-RUN echo which pdflatex
+RUN which pdflatex
 RUN wget -q https://github.com/yihui/ubuntu-bin/releases/download/latest/texlive-local.deb
 RUN dpkg -i texlive-local.deb && rm texlive-local.deb
-RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-pandoc | bash
-RUN mv $HOME/bin/pandoc $HOME/bin/pandoc-citeproc /usr/local/bin/
+RUN wget -q https://github.com/jgm/pandoc/releases/download/1.15.0.6/pandoc-1.15.0.6-1-amd64.deb
+RUN dpkg -i pandoc-*.deb && rm pandoc-*.deb
 
 RUN apt-get install -y r-base-dev git > /dev/null
 
