@@ -8,7 +8,7 @@ RUN add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_rel
 RUN add-apt-repository -y ppa:marutter/c2d4u
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get -qq update
-RUN apt-get install -y wget dpkg > /dev/null
+RUN apt-get install -y wget dpkg libgmp10 > /dev/null
 
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
 RUN for i in $HOME/texlive/bin/x86_64-linux/*; do ln -s $i /usr/local/bin/; done
