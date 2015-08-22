@@ -11,7 +11,7 @@ RUN apt-get -qq update
 RUN apt-get install -y wget dpkg > /dev/null
 
 RUN wget -q -O - https://github.com/yihui/crandalf/raw/master/inst/scripts/install-texlive | bash
-RUN for i in $(find $HOME/texlive/bin/x86_64-linux -type f -executable); do sudo ln -s $i /usr/local/bin/; done
+RUN for i in $(find $HOME/texlive/bin/x86_64-linux -type f); do sudo ln -s $i /usr/local/bin/; done
 RUN ls -l /usr/local/bin
 RUN which pdflatex
 RUN wget -q https://github.com/yihui/ubuntu-bin/releases/download/latest/texlive-local.deb
