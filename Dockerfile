@@ -3,7 +3,7 @@ MAINTAINER Yihui Xie <xie@yihui.name>
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get -qq update
-RUN apt-get install -y software-properties-common > /dev/null
+RUN apt-get install -y software-properties-common libgdal1-dev libproj-dev > /dev/null
 RUN add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu `lsb_release -cs`/"
 RUN add-apt-repository -y ppa:marutter/c2d4u
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
